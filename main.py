@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from twilio.twiml.messaging_response import MessagingResponse
 
 load_dotenv()
-WEATHERSTACK_API_KEY = os.environ.get('WEATHERSTACK_API_KEY')
 
 app = Flask(__name__)
 
@@ -33,6 +32,7 @@ def weather():
         if data.get('error'):
             msg.body('Sorry, I am unable to get weather data for that location.')
         else:
+            # TODO: structure API JSON obj to desired weather sms msg
             weather_location = data['location']['name']
             temperature = data['current']['temperature']
             description = data['current']['weather_descriptions'][0]
